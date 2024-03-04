@@ -85,7 +85,32 @@
             </div>
         </div>
     </header>
-    <main class="ml-4 mr-4 mt-8 lg:ml-32 lg:mr-32">
+    <main class="ml-4 mr-4 mt-8 lg:ml-32 lg:mr-32"><!--Sub-heading Section-->
+        <section>
+            <h2 class="flex justify-center py-7 text-[#131318] font-extrabold text-2xl lg:text-4xl">Let's Discuss</h2>
+            <p class="m-auto text-center pb-7 text-[#12132D] max-w-xl">Engage in thought-provoking discussions, share your insights, and connect with like-minded individuals in our vibrant forum community!</p>
+        </section>
+
+        <!--main post Section-->
+        <section class="main-post-section">
+            <div class="main-post-container gap-8 flex flex-col md:flex-row justify-between text-center">
+                <!-- main post -->
+                <div id="post-container" class="w-full md:w-3/5 mb-8 md:mb-0">
+                </div>
+                <!-- Mark read post -->
+                <div id="read-post" class="w-full md:w-2/5 p-8 mb-8 bg-gray-300 rounded-xl">
+                    <div class="flex justify-between items-center w-full">
+                        <p class="text-xl font-bold md:text-base">Title</p>
+                        <p class="flex items-center gap-4">
+                            <i class="fa-solid fa-check-double text-green-600"></i>
+                            Mark as read
+                            <span id="read-count">(0)</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
   <script src="js/script.js"></script>  
 </body>
 </html>
