@@ -78,3 +78,64 @@ const displayPosts = (posts, postContainer) => {
          });
      });
  };
+
+ // Function to handle search functionality
+const handleSearch = async () => {
+    const searchInput = document.getElementById('search-input').value.trim().toLowerCase();
+    const loadingSpinner = document.getElementById('loading-spinner');
+
+    // Show loading spinner
+    loadingSpinner.style.display = 'block';
+
+    try {
+        //2-second delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
+        const data = await res.json();
+        const posts = data.posts;
+
+        // Filter posts based on category
+        const filteredPosts = posts.filter(post => post.category.toLowerCase() === searchInput);
+
+        // Display filtered posts or show message if no posts found
+        if (filteredPosts.length > 0) {
+            displayPosts(filteredPosts, document.getElementById('post-container'));
+        } else {
+            displayNoPostsMessage();
+        }
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+    } finally {
+        loadingSpinner.style.display = 'none';
+    }
+};
+
+// message when no posts are found
+const displayNoPostsMessage = () => {
+    document.getElementById('post-container').innerHTML = '<p>No posts found for the entered category.</p>';
+};
+
+document.getElementById('search-btn').addEventListener('click', handleSearch);
+
+// Load initial posts
+const loadPost = async () => {
+    try {
+        const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
+        const data = await res.json();
+        displayPosts(data.posts, document.getElementById('post-container'));
+    } catch (error) {
+        console.error('Error loading posts:', error);
+    }
+};
+
+// Load latest posts
+const loadLatestPosts = async () => {
+    try {
+        const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
+        const data = await res.json();
+        displayLatestPosts(data);
+    } catch (error) {
+        console.error('Error loading latest posts:', error);
+    }
+};
