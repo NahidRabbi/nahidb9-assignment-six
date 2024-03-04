@@ -45,3 +45,36 @@ const displayPosts = (posts, postContainer) => {
         `;
 
         postContainer.appendChild(postCard);
+        
+        // Get the circleIcon for this post
+        var circleIcon = document.getElementById(`circle-icon-${post.id}`);
+        var isActive = post.isActive;
+
+        // Add class based on the value of isActive
+        if (isActive) {
+            circleIcon.classList.add("fa-circle-green");
+        } else {
+            circleIcon.classList.add("fa-circle-red");
+        }
+    });
+
+     // Add event listener to "Mark as read" buttons
+     const readDoneButtons = document.querySelectorAll('.read-done-btn');
+     readDoneButtons.forEach(button => {
+         button.addEventListener('click', () => {
+             appendCount++;
+             document.getElementById('read-count').textContent = `(${appendCount})`;
+ 
+             // Append HTML for the read post
+             const title = button.getAttribute('data-title');
+             const viewCount = button.getAttribute('data-view-count');
+             const readPostHTML = `
+                 <div class="bg-white p-4 flex justify-between items-center text-center rounded-xl mt-4">
+                     <h2 class="text-xl font-extrabold text-heading py-4">${title}</h2>
+                     <p><span class="pr-4"><i class="fa-solid fa-eye pr-2"></i>${viewCount}</span></p>
+                 </div>
+             `;
+             document.getElementById('read-post').insertAdjacentHTML('beforeend', readPostHTML);
+         });
+     });
+ };
